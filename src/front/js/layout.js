@@ -3,8 +3,9 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./pages/home";
-import { Demo } from "./pages/demo";
-import { Single } from "./pages/single";
+import { RegisterUser } from "./pages/RegisterUser";
+import { LoginUser } from "./pages/LoginUser";
+import { Dashboard } from "./pages/Dashboard";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -20,17 +21,23 @@ const Layout = () => {
 		<div className="d-flex flex-column h-100">
 			<BrowserRouter basename={basename}>
 				<ScrollToTop>
-					<Navbar />
 					<Switch>
 						<Route exact path="/">
 							<Home />
 						</Route>
-						<Route exact path="/demo">
-							<Demo />
+
+						<Route exact path="/register">
+							<RegisterUser />
 						</Route>
-						<Route exact path="/single/:theid">
-							<Single />
+
+						<Route exact path="/login">
+							<LoginUser />
 						</Route>
+
+						<Route exact path="/dashboard">
+							<Dashboard />
+						</Route>
+
 						<Route>
 							<h1>Not found!</h1>
 						</Route>
