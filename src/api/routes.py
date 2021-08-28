@@ -38,12 +38,14 @@ def register():
 
 @api.route('/login', methods=['POST'])
 def login():
-    content = request.get_json(silent=True)
+    content = request.get_json()
     user = User.query.filter(User.email==content["email"]).first()
     if user is None:
         return jsonify({"message": "Invalid email"}), 403
     
-    if not ph.verify(user.password, content["password"]):
+    try:
+         ph.verify(user.password, content["password"])
+    except:
         return jsonify({"message": "Invalid password"}), 403
 
     access_token = create_access_token(identity=user.id, additional_claims= {"email":user.email})
